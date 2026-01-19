@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <title>SIM Keuangan | CoffeeHub</title>
+</head>
+<body>
+
+<script>
+  if (localStorage.getItem("login") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+<h2>SIM Keuangan</h2>
+<table border="1" cellpadding="8">
+  <tr>
+    <th>Keterangan</th>
+    <th>Jumlah</th>
+  </tr>
+  <tr>
+    <td>Pendapatan Harian</td>
+    <td>Rp 3.500.000</td>
+  </tr>
+  <tr>
+    <td>Biaya Operasional</td>
+    <td>Rp 2.250.000</td>
+  </tr>
+  <tr>
+    <td>Laba Bersih</td>
+    <td>Rp 1.250.000</td>
+  </tr>
+</table>
+
+<br>
+<a href="index.html">⬅ Kembali ke Dashboard</a>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard | CoffeeHub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>
+  if (localStorage.getItem("login") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+<header>
+  <h1>CoffeeHub</h1>
+  <p>Dashboard Sistem Informasi Manajemen</p>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <ul>
+      <li><a href="index.html">Dashboard</a></li>
+      <li><a href="keuangan.html">SIM Keuangan</a></li>
+      <li><a href="pemasaran.html">SIM Pemasaran</a></li>
+      <li><a href="sdm.html">SIM SDM</a></li>
+      <li><a href="produksi.html">SIM Produksi</a></li>
+      <li><a href="#" onclick="logout()">Logout</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <h2>Ringkasan Operasional</h2>
+    <ul>
+      <li>Pendapatan Harian: Rp 3.500.000</li>
+      <li>Transaksi: 120</li>
+      <li>Barista Aktif: 6</li>
+      <li>Cup Terjual: 150</li>
+    </ul>
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f5efe6;
+}
+
+header {
+  background-color: #6f4e37;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: #8b5e3c;
+  color: white;
+  min-height: 100vh;
+}
+
+.sidebar h3 {
+  text-align: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #a47148;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 12px 20px;
+  cursor: pointer;
+}
+
+.sidebar ul li:hover {
+  background-color: #a47148;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.card h4 {
+  color: #6f4e37;
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 25px;
+  padding: 12px 20px;
+  background-color: #6f4e37;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #5a3f2c;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #e0d4c8;
+}

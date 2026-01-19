@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <title>SIM SDM | CoffeeHub</title>
+</head>
+<body>
+
+<script>
+  if (localStorage.getItem("login") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+<h2>SIM Sumber Daya Manusia</h2>
+<table border="1" cellpadding="8">
+  <tr>
+    <th>Nama</th>
+    <th>Jabatan</th>
+    <th>Shift</th>
+  </tr>
+  <tr>
+    <td>Andi</td>
+    <td>Barista</td>
+    <td>Pagi</td>
+  </tr>
+  <tr>
+    <td>Sinta</td>
+    <td>Kasir</td>
+    <td>Siang</td>
+  </tr>
+</table>
+
+<br>
+<a href="index.html">⬅ Kembali ke Dashboard</a>
+</body>
+</html>

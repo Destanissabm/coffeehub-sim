@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Admin | CoffeeHub</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<div class="login-container">
+  <h2>Login Admin CoffeeHub</h2>
+  <p>Sistem Informasi Manajemen Kedai Kopi</p>
+
+  <form onsubmit="return loginAdmin()">
+    <label>Username</label>
+    <input type="text" id="username" placeholder="Masukkan username" required>
+
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Masukkan password" required>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p class="note">*Akses khusus admin</p>
+</div>
+
+<script src="login.js"></script>
+</body>
+</html>
