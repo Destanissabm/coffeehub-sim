@@ -1,44 +1,57 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <title>SIM Keuangan | CoffeeHub</title>
+  <meta charset="UTF-8">
+  <title>CoffeeHub SIM</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<script>
-  if (localStorage.getItem("login") !== "true") {
-    window.location.href = "login.html";
-  }
-</script>
+<div class="topbar">
+  <div class="logo">☕ CoffeeHub</div>
+  <div class="user">Admin</div>
+</div>
 
+<div class="layout">
+  <div class="sidebar">
+    <a href="index.html">📊 Dashboard</a>
+    <a href="keuangan.html">💰 SIM Keuangan</a>
+    <a href="pemasaran.html">📣 SIM Pemasaran</a>
+    <a href="sdm.html">👥 SIM SDM</a>
+    <a href="produksi.html">⚙️ SIM Produksi</a>
+  </div>
+
+  <main class="content">
 <h2>SIM Keuangan</h2>
-<p>Informasi keuangan operasional CoffeeHub</p>
+<p>Pengelolaan dan monitoring keuangan CoffeeHub</p>
 
-<table>
-  <tr>
-    <th>Keterangan</th>
-    <th>Jumlah</th>
-  </tr>
-  <tr>
-    <td>Pendapatan</td>
-    <td>Rp 3.500.000</td>
-  </tr>
-  <tr>
-    <td>Biaya Operasional</td>
-    <td>Rp 2.250.000</td>
-  </tr>
-  <tr>
-    <td>Laba Bersih</td>
-    <td>Rp 1.250.000</td>
-  </tr>
-</table>
+<div class="cards">
+  <div class="card">
+    <span>Total Pendapatan</span>
+    <h3>Rp 26.000.000</h3>
+  </div>
+  <div class="card">
+    <span>Total Biaya</span>
+    <h3>Rp 18.500.000</h3>
+  </div>
+  <div class="card">
+    <span>Laba Bersih</span>
+    <h3>Rp 7.500.000</h3>
+  </div>
+</div>
 
-<br>
-<a href="index.html" class="btn">← Kembali ke Dashboard</a>
+<div class="card" style="margin-top:30px;">
+  <h3>Laporan Keuangan Sederhana</h3>
+  <table>
+    <tr><th>Kategori</th><th>Jumlah</th></tr>
+    <tr><td>Pendapatan</td><td>Rp 26.000.000</td></tr>
+    <tr><td>Biaya Operasional</td><td>Rp 18.500.000</td></tr>
+    <tr><td>Laba Bersih</td><td>Rp 7.500.000</td></tr>
+  </table>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
 
-<br>
-<a href="index.html">⬅ Kembali ke Dashboard</a>
 </body>
 </html>
-
