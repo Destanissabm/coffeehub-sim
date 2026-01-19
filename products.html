@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Katalog Produk | CoffeeHub</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Tambahan styling khusus katalog */
+    .catalog-header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      margin-bottom:1rem;
+    }
+    .search-input {
+      padding:8px;
+      border-radius:4px;
+      border:1px solid #ccc;
+      width:220px;
+    }
+    .filter-select {
+      padding:8px;
+      border-radius:4px;
+      border:1px solid #ccc;
+    }
+    .product-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+      gap:16px;
+      margin-top:16px;
+    }
+    .product-card {
+      background:#fff;
+      border-radius:8px;
+      padding:12px;
+      box-shadow:0 1px 4px rgba(0,0,0,0.08);
+      text-align:center;
+    }
+    .product-card img {
+      width:100%;
+      height:140px;
+      object-fit:cover;
+      border-radius:6px;
+      margin-bottom:8px;
+    }
+    .product-card h4 {
+      margin:6px 0;
+      font-size:1rem;
+    }
+    .product-price {
+      color:#2b8a3e;
+      font-weight:600;
+      margin-bottom:8px;
+    }
+    .btn {
+      padding:8px 10px;
+      border-radius:6px;
+      border:none;
+      cursor:pointer;
+    }
+    .btn-primary { background:#6b4f4f; color:#fff; }
+    .btn-outline { background:#fff; border:1px solid #6b4f4f; color:#6b4f4f; }
+    /* modal */
+    .modal {
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,0.4);
+    }
+    .modal .dialog {
+      background:#fff;
+      padding:16px;
+      border-radius:8px;
+      width:90%;
+      max-width:520px;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  if (localStorage.getItem("login") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+<header>
+  <h1>CoffeeHub</h1>
+  <p>Katalog Produk</p>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <ul>
+      <li><a href="index.html">Dashboard</a></li>
+      <li><a href="keuangan.html">Keuangan</a></li>
+      <li><a href="pemasaran.html">Pemasaran</a></li>
+      <li><a href="sdm.html">SDM</a></li>
+      <li><a href="produksi.html">Produksi</a></li>
+      <li><a href="products.html" class="active">Katalog Produk</a></li>
+      <li><a href="#" onclick="logout()">Logout</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <div class="catalog-header">
+      <div>
+        <input id="search" class="search-input" placeholder="Cari produk, cont. Latte..." />
+        <select id="category" class="filter-select">
+          <option value="">Semua Kategori</option>
+          <option value="kopi">Kopi</option>
+          <option value="makanan">Makanan</option>
+          <option value="minuman">Minuman Non-Kopi</option>
+        </select>
+      </div>
+      <div>
+        <button class="btn btn-outline" onclick="viewCart()">Lihat Keranjang (<span id="cartCount">0</span>)</button>
+      </div>
+    </div>
+
+    <div id="productGrid" class="product-grid"></div>
+
+    <!-- Modal detail produk -->
+    <div id="productModal" class="modal" onclick="closeModal(event)">
+      <div class="dialog" onclick="event.stopPropagation()">
+        <h3 id="modalTitle"></h3>
+        <img id="modalImage" src="" alt="" style="width:100%; height:220px; object-fit:cover; border-radius:6px; margin-bottom:8px;">
+        <p id="modalDesc"></p>
+        <p class="product-price" id="modalPrice"></p>
+        <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:8px;">
+          <button class="btn btn-outline" onclick="closeModal()">Tutup</button>
+          <button class="btn btn-primary" id="modalAdd">Tambah ke Keranjang</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Simple cart drawer (modal) -->
+    <div id="cartModal" class="modal" onclick="closeCart(event)">
+      <div class="dialog" onclick="event.stopPropagation()">
+        <h3>Keranjang Anda</h3>
+        <div id="cartItems"></div>
+        <p style="margin-top:12px; font-weight:600;">Total: <span id="cartTotal">Rp 0</span></p>
+        <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:8px;">
+          <button class="btn btn-outline" onclick="closeCart()">Tutup</button>
+          <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  // Data produk contoh
+  const products = [
+    { id:1, name:"Espresso", category:"kopi", price:15000, img:"https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=6d8b4b3afc2b39f3b6c13a3e0a8f2e58", desc:"Shot kopi pekat, klasik."},
+    { id:2, name:"Latte", category:"kopi", price:25000, img:"https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=6d8b4b3afc2b39f3b6c13a3e0a8f2e58", desc:"Kopi susu lembut, favorit banyak orang."},
+    { id:3, name:"Cappuccino", category:"kopi", price:30000, img:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=0b7e6f7d0f3f7b4c4b4d3e3f3b1c2a9a", desc:"Espresso dengan busa susu tebal."},
+    { id:4, name:"Americano", category:"kopi", price:20000, img:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=0b7e6f7d0f3f7b4c4b4d3e3f3b1c2a9a", desc:"Kopi panjang, ringan dan jernih."},
+    { id:5, name:"Mocha", category:"kopi", price:32000, img:"https://images.unsplash.com/photo-1445077100181-3f33f8be4f1b?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=59f6c3a6e1c2b9fe0a16e9a1d6b3b1c3", desc:"Cokelat dan espresso berpadu."},
+    { id:6, name:"Croissant", category:"makanan", price:18000, img:"https://images.unsplash.com/photo-1548365328-8a7b1d3d3f7c?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=9f3b1a8a1b5c4b6d7e8f9a0b1c2d3e4f", desc:"Roti renyah, cocok untuk sarapan."},
+    { id:7, name:"Iced Tea", category:"minuman", price:12000, img:"https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=3a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d", desc:"Teh dingin segar."}
+  ];
+
+  const productGrid = document.getElementById('productGrid');
+  const searchInput = document.getElementById('search');
+  const categorySelect = document.getElementById('category');
+  const cartCountEl = document.getElementById('cartCount');
+
+  function formatCurrency(v){
+    return 'Rp ' + v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
+  function renderProducts(){
+    const q = searchInput.value.toLowerCase();
+    const cat = categorySelect.value;
+    productGrid.innerHTML = '';
+    const filtered = products.filter(p => {
+      const matchesQ = p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q);
+      const matchesCat = cat ? p.category === cat : true;
+      return matchesQ && matchesCat;
+    });
+    filtered.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML = `
+        <img src="${p.img}" alt="${p.name}">
+        <h4>${p.name}</h4>
+        <div class="product-price">${formatCurrency(p.price)}</div>
+        <div style="display:flex; gap:8px; justify-content:center;">
+          <button class="btn btn-outline" onclick="openDetail(${p.id})">Detail</button>
+          <button class="btn btn-primary" onclick="addToCart(${p.id})">Tambah</button>
+        </div>
+      `;
+      productGrid.appendChild(card);
+    });
+  }
+
+  searchInput.addEventListener('input', renderProducts);
+  categorySelect.addEventListener('change', renderProducts);
+
+  // Modal product
+  const modal = document.getElementById('productModal');
+  function openDetail(id){
+    const p = products.find(x => x.id === id);
+    if(!p) return;
+    document.getElementById('modalTitle').innerText = p.name;
+    document.getElementById('modalImage').src = p.img;
+    document.getElementById('modalDesc').innerText = p.desc;
+    document.getElementById('modalPrice').innerText = formatCurrency(p.price);
+    document.getElementById('modalAdd').onclick = () => { addToCart(id); closeModal(); };
+    modal.style.display = 'flex';
+  }
+  function closeModal(e){
+    if(!e || e.target === modal) modal.style.display = 'none';
+  }
+
+  // Keranjang sederhana (localStorage)
+  function getCart(){
+    return JSON.parse(localStorage.getItem('cart') || '[]');
+  }
+  function saveCart(c){ localStorage.setItem('cart', JSON.stringify(c)); updateCartCount(); }
+  function addToCart(id){
+    const c = getCart();
+    const item = c.find(x => x.id === id);
+    if(item) item.qty++;
+    else {
+      const p = products.find(x => x.id === id);
+      c.push({ id: p.id, name: p.name, price: p.price, qty:1 });
+    }
+    saveCart(c);
+    alert('Produk ditambahkan ke keranjang');
+  }
+  function updateCartCount(){
+    const c = getCart();
+    const total = c.reduce((s,i)=>s+i.qty,0);
+    cartCountEl.innerText = total;
+  }
+
+  // Cart modal
+  const cartModal = document.getElementById('cartModal');
+  function viewCart(){
+    renderCartItems();
+    cartModal.style.display = 'flex';
+  }
+  function renderCartItems(){
+    const itemsEl = document.getElementById('cartItems');
+    const c = getCart();
+    if(c.length === 0){
+      itemsEl.innerHTML = '<p>Keranjang kosong.</p>';
+      document.getElementById('cartTotal').innerText = formatCurrency(0);
+      return;
+    }
+    itemsEl.innerHTML = '';
+    let total = 0;
+    c.forEach(i => {
+      total += i.price * i.qty;
+      const el = document.createElement('div');
+      el.style.display = 'flex';
+      el.style.justifyContent = 'space-between';
+      el.style.alignItems = 'center';
+      el.style.marginBottom = '8px';
+      el.innerHTML = `<div>
+                        <strong>${i.name}</strong><br><small>${formatCurrency(i.price)} x ${i.qty}</small>
+                      </div>
+                      <div>
+                        <button class="btn btn-outline" onclick="decreaseQty(${i.id})">-</button>
+                        <button class="btn btn-outline" onclick="increaseQty(${i.id})">+</button>
+                        <button class="btn btn-outline" onclick="removeItem(${i.id})">Hapus</button>
+                      </div>`;
+      itemsEl.appendChild(el);
+    });
+    document.getElementById('cartTotal').innerText = formatCurrency(total);
+  }
+  function increaseQty(id){
+    const c = getCart();
+    const it = c.find(x=>x.id===id);
+    if(it){ it.qty++; saveCart(c); renderCartItems(); }
+  }
+  function decreaseQty(id){
+    const c = getCart();
+    const it = c.find(x=>x.id===id);
+    if(it){ it.qty = Math.max(1, it.qty-1); saveCart(c); renderCartItems(); }
+  }
+  function removeItem(id){
+    let c = getCart();
+    c = c.filter(x=>x.id!==id);
+    saveCart(c);
+    renderCartItems();
+  }
+  function closeCart(e){
+    if(!e || e.target === cartModal) cartModal.style.display = 'none';
+  }
+  function checkout(){
+    // Simpel: kosongkan keranjang dan tunjukkan konfirmasi
+    localStorage.removeItem('cart');
+    updateCartCount();
+    closeCart();
+    alert('Checkout berhasil (simulasi).');
+  }
+
+  // logout helper (sama seperti di index)
+  function logout(){
+    localStorage.removeItem('login');
+    window.location.href = 'login.html';
+  }
+
+  // init
+  renderProducts();
+  updateCartCount();
+</script>
+
+</body>
+</html>
