@@ -1,73 +1,24 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>CoffeeHub SIM</title>
-  <link rel="stylesheet" href="style.css">
+  <title>SIM Produksi | CoffeeHub</title>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="logo">☕ CoffeeHub</div>
-  <div class="user">Admin</div>
-</div>
+<script>
+  if (localStorage.getItem("login") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
 
-<div class="layout">
-  <div class="sidebar">
-    <a href="index.html">📊 Dashboard</a>
-    <a href="keuangan.html">💰 SIM Keuangan</a>
-    <a href="pemasaran.html">📣 SIM Pemasaran</a>
-    <a href="sdm.html">👥 SIM SDM</a>
-    <a href="produksi.html">⚙️ SIM Produksi</a>
-  </div>
-
-  <main class="content">
 <h2>SIM Produksi</h2>
-<p>Pengelolaan produksi dan stok bahan baku</p>
+<ul>
+  <li>Biji Kopi Arabika: Aman</li>
+  <li>Susu Fresh: Menipis</li>
+  <li>Cup Terjual Hari Ini: 150</li>
+  <li>Kapasitas Produksi: Optimal</li>
+</ul>
 
-<div class="cards">
-  <div class="card">
-    <span>Cup Terjual</span>
-    <h3>150</h3>
-  </div>
-  <div class="card">
-    <span>Stok Biji Kopi</span>
-    <h3>Aman</h3>
-  </div>
-  <div class="card">
-    <span>Menu Terlaris</span>
-    <h3>Latte</h3>
-  </div>
-</div>
-
-<div class="card" style="margin-top:30px;">
-  <h3>Stok Bahan Baku</h3>
-  <table>
-    <tr>
-      <th>Bahan</th>
-      <th>Stok</th>
-      <th>Status</th>
-    </tr>
-    <tr>
-      <td>Biji Kopi Arabika</td>
-      <td>15 kg</td>
-      <td>Aman</td>
-    </tr>
-    <tr>
-      <td>Susu</td>
-      <td>8 liter</td>
-      <td>Perlu Restok</td>
-    </tr>
-  </table>
-</div>
-
-
-  </main>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="script.js"></script>
-
+<a href="index.html">⬅ Kembali ke Dashboard</a>
 </body>
 </html>
-
