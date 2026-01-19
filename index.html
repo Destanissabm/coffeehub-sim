@@ -31,38 +31,88 @@
   </aside>
 
 <main class="content">
-  <h2>Dashboard CoffeeHub</h2>
-  <p>Ringkasan kinerja operasional kedai kopi hari ini</p>
+  <h2>Dashboard Manajemen</h2>
+  <p>Ringkasan kinerja operasional CoffeeHub</p>
 
+  <!-- KPI CARDS -->
   <div class="cards">
     <div class="card">
-      <h3>Keuangan</h3>
-      <p>Pendapatan: <b>Rp 3.500.000</b></p>
-      <p>Laba Bersih: Rp 1.250.000</p>
+      <span>Pendapatan Hari Ini</span>
+      <h3>Rp 3.500.000</h3>
     </div>
-
     <div class="card">
-      <h3>Pemasaran</h3>
-      <p>Transaksi: 120</p>
-      <p>Pelanggan Loyal: 85</p>
+      <span>Total Transaksi</span>
+      <h3>120</h3>
     </div>
-
     <div class="card">
-      <h3>SDM</h3>
-      <p>Barista Aktif: 6</p>
-      <p>Shift Terpenuhi</p>
+      <span>Pelanggan Loyal</span>
+      <h3>85</h3>
     </div>
-
     <div class="card">
-      <h3>Produksi</h3>
-      <p>Cup Terjual: 150</p>
-      <p>Stok Biji Kopi: Aman</p>
+      <span>Barista Aktif</span>
+      <h3>6 Orang</h3>
     </div>
   </div>
+
+  <!-- GRAFIK -->
+  <div class="cards" style="margin-top:30px;">
+    <div class="card">
+      <h3>Grafik Penjualan Mingguan</h3>
+      <canvas id="salesChart"></canvas>
+    </div>
+
+    <div class="card">
+      <h3>Grafik Pendapatan Bulanan</h3>
+      <canvas id="revenueChart"></canvas>
+    </div>
+  </div>
+
+  <!-- TABEL TRANSAKSI -->
+  <div class="card" style="margin-top:30px;">
+    <h3>Transaksi Terbaru</h3>
+    <table>
+      <tr>
+        <th>Tanggal</th>
+        <th>Produk</th>
+        <th>Jumlah</th>
+        <th>Total</th>
+      </tr>
+      <tr>
+        <td>12 Jan 2026</td>
+        <td>Latte</td>
+        <td>3</td>
+        <td>Rp 75.000</td>
+      </tr>
+      <tr>
+        <td>12 Jan 2026</td>
+        <td>Americano</td>
+        <td>2</td>
+        <td>Rp 40.000</td>
+      </tr>
+      <tr>
+        <td>11 Jan 2026</td>
+        <td>Cappuccino</td>
+        <td>4</td>
+        <td>Rp 120.000</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- INSIGHT -->
+  <div class="card" style="margin-top:30px;">
+    <h3>Insight Manajerial</h3>
+    <p>
+      Penjualan tertinggi terjadi pada akhir pekan, menunjukkan peningkatan
+      permintaan pelanggan. Strategi promosi dapat difokuskan pada hari kerja
+      untuk menstabilkan pendapatan.
+    </p>
+  </div>
+
 </main>
 
 
 <script src="script.js"></script>
 </body>
 </html>
+
 
