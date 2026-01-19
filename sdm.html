@@ -1,36 +1,68 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <title>SIM SDM | CoffeeHub</title>
+  <meta charset="UTF-8">
+  <title>CoffeeHub SIM</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<script>
-  if (localStorage.getItem("login") !== "true") {
-    window.location.href = "login.html";
-  }
-</script>
+<div class="topbar">
+  <div class="logo">☕ CoffeeHub</div>
+  <div class="user">Admin</div>
+</div>
 
-<h2>SIM Sumber Daya Manusia</h2>
-<table border="1" cellpadding="8">
-  <tr>
-    <th>Nama</th>
-    <th>Jabatan</th>
-    <th>Shift</th>
-  </tr>
-  <tr>
-    <td>Andi</td>
-    <td>Barista</td>
-    <td>Pagi</td>
-  </tr>
-  <tr>
-    <td>Sinta</td>
-    <td>Kasir</td>
-    <td>Siang</td>
-  </tr>
-</table>
+<div class="layout">
+  <div class="sidebar">
+    <a href="index.html">📊 Dashboard</a>
+    <a href="keuangan.html">💰 SIM Keuangan</a>
+    <a href="pemasaran.html">📣 SIM Pemasaran</a>
+    <a href="sdm.html">👥 SIM SDM</a>
+    <a href="produksi.html">⚙️ SIM Produksi</a>
+  </div>
 
-<br>
-<a href="index.html">⬅ Kembali ke Dashboard</a>
+  <main class="content">
+  <h2>SIM SDM</h2>
+<p>Pengelolaan sumber daya manusia CoffeeHub</p>
+
+<div class="cards">
+  <div class="card">
+    <span>Total Karyawan</span>
+    <h3>8 Orang</h3>
+  </div>
+  <div class="card">
+    <span>Barista Aktif</span>
+    <h3>6 Orang</h3>
+  </div>
+  <div class="card">
+    <span>Shift Terpenuhi</span>
+    <h3>100%</h3>
+  </div>
+</div>
+
+<div class="card" style="margin-top:30px;">
+  <h3>Data Karyawan</h3>
+  <table>
+    <tr>
+      <th>Nama</th>
+      <th>Posisi</th>
+      <th>Shift</th>
+    </tr>
+    <tr>
+      <td>Andi</td>
+      <td>Barista</td>
+      <td>Pagi</td>
+    </tr>
+    <tr>
+      <td>Sinta</td>
+      <td>Kasir</td>
+      <td>Siang</td>
+    </tr>
+  </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
