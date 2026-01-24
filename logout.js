@@ -5,6 +5,9 @@ function logout() {
   // Hapus status login
   localStorage.removeItem('login');
 
+  // Hapus role jika ada
+  localStorage.removeItem('role');
+
   // Opsional: hapus data lain yang terkait session (mis. keranjang)
   localStorage.removeItem('cart');
 
