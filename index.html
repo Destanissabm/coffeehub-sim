@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
+  <body>
+
+<script>
+  if(localStorage.getItem("login") !== "true"){
+    window.location.href = "login.html";
+  }
+</script>
+
 <head>
   <meta charset="UTF-8">
   <title>Dashboard | CoffeeHub</title>
@@ -102,11 +110,6 @@
 </head>
 <body>
 
-<script>
-  if (localStorage.getItem("login") !== "true") {
-    window.location.href = "login.html";
-  }
-</script>
 
 <header>
   <h1>CoffeeHub</h1>
@@ -421,4 +424,12 @@
 <script src="script.js"></script>
 
 </body>
+    <script>
+function logout(){
+  localStorage.removeItem("login");
+  window.location.href = "login.html";
+}
+</script>
+
 </html>
+
