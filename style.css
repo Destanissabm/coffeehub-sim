@@ -183,7 +183,34 @@ table th {
 }
 
 .status.optimal {
+  
   background:#e6fcf5;
   color:#0b7285;
+}
+
+/* ===== TABEL MONITORING PRODUKSI (FIX) ===== */
+.monitoring-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.monitoring-table th,
+.monitoring-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.monitoring-table th {
+  background-color: #6f4e37;
+  color: white;
+}
+
+.monitoring-table td {
+  background-color: #fff;
 }
 
