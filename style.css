@@ -121,3 +121,31 @@ table th {
 .btn:hover {
   background-color: #4b2e1f;
 }
+
+.status {
+  padding:6px 10px;
+  border-radius:6px;
+  font-weight:600;
+  margin-top:6px;
+  display:inline-block;
+}
+
+.status.aman {
+  background:#d3f9d8;
+  color:#2b8a3e;
+}
+
+.status.menipis {
+  background:#fff3bf;
+  color:#e67700;
+}
+
+.status.info {
+  background:#e7f5ff;
+  color:#1c7ed6;
+}
+
+.status.optimal {
+  background:#e6fcf5;
+  color:#0b7285;
+}
