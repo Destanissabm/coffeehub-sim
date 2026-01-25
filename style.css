@@ -117,6 +117,43 @@ table th {
   border-radius: 6px;
   text-decoration: none;
 }
+.table-produksi {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.table-produksi th,
+.table-produksi td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.table-produksi th {
+  background-color: #f4f4f4;
+}
+
+.aman {
+  color: green;
+  font-weight: 600;
+}
+
+.menipis {
+  color: orange;
+  font-weight: 600;
+}
+
+.info {
+  color: #007bff;
+  font-weight: 600;
+}
+
+.optimal {
+  color: teal;
+  font-weight: 600;
+}
+
 
 .btn:hover {
   background-color: #4b2e1f;
@@ -149,3 +186,4 @@ table th {
   background:#e6fcf5;
   color:#0b7285;
 }
+
